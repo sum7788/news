@@ -1,6 +1,5 @@
 """
-서울 정비사업 뉴스 자동 수집기
-네이버 뉴스 API → data/news.json 저장
+서울 정비사업 통합심의위원회 개최결과 뉴스 수집기
 """
 import json, os, urllib.request, urllib.parse, re
 from datetime import datetime, timezone, timedelta
@@ -12,13 +11,9 @@ CLIENT_ID = os.environ["NAVER_CLIENT_ID"]
 CLIENT_SECRET = os.environ["NAVER_CLIENT_SECRET"]
 
 KEYWORDS = [
-    "서울시 정비사업 통합심의위원회",
-    "서울 재개발 재건축 사업시행인가",
-    "한남뉴타운 재개발",
-    "노량진뉴타운 재개발",
-    "목동 재건축",
-    "서울 뉴타운 관리처분인가",
-    "서울 정비사업 착공",
+    "서울시 정비사업 통합심의위원회 개최결과",
+    "정비사업 통합심의위원회 재개발 재건축",
+    "서울시 통합심의 재개발 착공 사업시행인가",
 ]
 
 def load():
@@ -56,6 +51,16 @@ def search(keyword):
         print(f"오류 ({keyword}): {e}")
         return {"items": []}
 
+# 통합심의 관련 키워드 — 이 중 하나라도 포함된 기사만 저장
+FILTER_KEYWORDS = [
+    "통합심의위원회", "통합심의", "개최결과", "사업시행인가", "관리처분인가",
+    "정비계획", "재개발 착공", "재건축 착공", "정비구역"
+]
+
+def is_relevant(title, summary):
+    text = title + " " + summary
+    return any(kw in text for kw in FILTER_KEYWORDS)
+
 def main():
     data = load()
     existing = {it["url"] for it in data["items"]}
@@ -69,8 +74,12 @@ def main():
             url = item.get("originallink") or item.get("link", "")
             summary = clean(item.get("description", ""))[:300]
             date = parse_date(item.get("pubDate", ""))
+
             if url in existing:
                 continue
+            if not is_relevant(title, summary):
+                continue
+
             data["items"].append({
                 "title": title, "url": url,
                 "summary": summary, "date": date,
@@ -81,11 +90,10 @@ def main():
             added.append(title)
 
     data["items"].sort(key=lambda x: x.get("date",""), reverse=True)
-    # 최대 500건 유지
-    data["items"] = data["items"][:500]
+    data["items"] = data["items"][:300]
 
     if added:
-        print(f"\n신규 {len(added)}건 추가:")
+        print(f"\n신규 {len(added)}건:")
         for t in added[:10]:
             print(f"  · {t}")
     else:
