@@ -2,8 +2,8 @@ name: 정비사업 뉴스 자동 수집
 
 on:
   schedule:
-    - cron: '0 0 * * 1'  # 매주 월요일 오전 9시 KST
-  workflow_dispatch:      # 수동 실행 가능
+    - cron: '0 0 * * *'  # 매일 오전 9시 KST
+  workflow_dispatch:
 
 jobs:
   scrape:
