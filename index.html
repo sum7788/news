@@ -13,35 +13,52 @@
   --font: "Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
 }
 body { background: var(--bg); font-family: var(--font); color: var(--text); min-height: 100vh; }
-.header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 16px 20px; position: sticky; top: 0; z-index: 100; }
-.header-top { display: flex; align-items: center; gap: 12px; }
+.header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 20px; position: sticky; top: 0; z-index: 100; }
+.header-top { display: flex; align-items: center; gap: 10px; }
 .logo { font-size: 17px; font-weight: 700; }
 .logo span { color: var(--accent); }
 .badge { background: var(--accent-light); color: var(--accent); font-size: 12px; padding: 2px 8px; border-radius: 99px; font-weight: 600; }
+.unread-badge { background: #E24B4A; color: #fff; font-size: 11px; padding: 2px 7px; border-radius: 99px; font-weight: 700; }
 .meta { font-size: 11px; color: var(--text3); margin-left: auto; }
-.link-btn { background: var(--accent); color: #fff; font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 8px; text-decoration: none; white-space: nowrap; }
-.search-bar { padding: 10px 20px; background: var(--surface); border-bottom: 1px solid var(--border); }
-.search-wrap { position: relative; }
-.search-wrap input { width: 100%; padding: 8px 12px 8px 34px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); font-size: 14px; color: var(--text); outline: none; font-family: var(--font); }
+.link-btn { background: var(--accent); color: #fff; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px; text-decoration: none; white-space: nowrap; }
+
+.toolbar { display: flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--surface); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.search-wrap { position: relative; flex: 1; min-width: 180px; }
+.search-wrap input { width: 100%; padding: 7px 12px 7px 32px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); font-size: 13px; color: var(--text); outline: none; font-family: var(--font); }
 .search-wrap input:focus { border-color: var(--accent); background: var(--surface); }
-.search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 14px; pointer-events: none; }
-.filters { display: flex; gap: 6px; flex-wrap: wrap; padding: 10px 20px; background: var(--surface); border-bottom: 1px solid var(--border); }
+.search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 13px; pointer-events: none; }
 .pill { padding: 5px 12px; border-radius: 99px; border: 1px solid var(--border); background: var(--surface); font-size: 12px; cursor: pointer; color: var(--text2); font-family: var(--font); white-space: nowrap; transition: all .12s; }
-.pill:hover { border-color: #aaa; color: var(--text); }
+.pill:hover { border-color: #aaa; }
 .pill.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-.main { max-width: 860px; margin: 0 auto; padding: 14px 20px; }
-.result-info { font-size: 12px; color: var(--text3); margin-bottom: 12px; }
-.news-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 10px; transition: border-color .12s, box-shadow .12s; }
-.news-card:hover { border-color: #c5c3bb; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
-.news-title { font-size: 15px; font-weight: 600; line-height: 1.5; margin-bottom: 8px; }
+.mark-all-btn { padding: 5px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); font-size: 12px; cursor: pointer; color: var(--text2); font-family: var(--font); white-space: nowrap; }
+.mark-all-btn:hover { background: var(--bg); }
+
+.main { max-width: 860px; margin: 0 auto; padding: 16px 20px; }
+.result-info { font-size: 12px; color: var(--text3); margin-bottom: 16px; }
+
+.date-group { margin-bottom: 24px; }
+.date-label { font-size: 13px; font-weight: 700; color: var(--text2); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.date-unread { background: #E24B4A; color: #fff; font-size: 10px; padding: 1px 6px; border-radius: 99px; font-weight: 700; }
+
+.news-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; margin-bottom: 8px; transition: all .12s; }
+.news-card:hover { border-color: #c5c3bb; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+.news-card.read { opacity: 0.55; }
+.news-card.read .news-title a { color: var(--text3); }
+.news-head { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 6px; }
+.unread-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 5px; }
+.read-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border); flex-shrink: 0; margin-top: 5px; }
+.news-title { font-size: 14px; font-weight: 600; line-height: 1.5; flex: 1; }
 .news-title a { color: var(--text); text-decoration: none; }
 .news-title a:hover { color: var(--accent); }
-.news-summary { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 10px; }
-.news-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.news-summary { font-size: 12px; color: var(--text2); line-height: 1.7; margin-bottom: 10px; padding-left: 17px; }
+.news-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-left: 17px; }
 .news-source { font-size: 11px; color: var(--text3); background: var(--bg); padding: 2px 8px; border-radius: 99px; }
-.news-date { font-size: 11px; color: var(--text3); }
-.news-link { font-size: 11px; color: var(--accent); font-weight: 600; text-decoration: none; margin-left: auto; }
 .kw-tag { font-size: 11px; padding: 2px 7px; border-radius: 4px; background: #e6f1fb; color: #185FA5; border: 1px solid #cce0f5; }
+.news-link { font-size: 11px; color: var(--accent); font-weight: 600; text-decoration: none; }
+.read-btn { margin-left: auto; font-size: 11px; padding: 3px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); cursor: pointer; color: var(--text2); font-family: var(--font); transition: all .1s; }
+.read-btn:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
+.news-card.read .read-btn { background: var(--bg); color: var(--text3); }
+
 .empty { text-align: center; padding: 60px 20px; color: var(--text3); }
 .empty-icon { font-size: 40px; margin-bottom: 12px; }
 .loading { text-align: center; padding: 60px 20px; color: var(--text3); }
@@ -52,28 +69,26 @@ body { background: var(--bg); font-family: var(--font); color: var(--text); min-
 <body>
 <div class="header">
   <div class="header-top">
-    <div class="logo">🏗️ 서울 <span>정비사업</span> 통합심의 뉴스</div>
-    <span class="badge" id="totalBadge">로딩 중</span>
+    <div class="logo">🏗️ 서울 <span>정비사업</span> 통합심의</div>
+    <span class="badge" id="totalBadge">-</span>
+    <span class="unread-badge" id="unreadBadge" style="display:none"></span>
     <span class="meta" id="updatedAt"></span>
     <a href="https://sum7788.github.io/seoul/seoul.html" target="_blank" class="link-btn">🗺️ 탐색기</a>
   </div>
 </div>
 
-<div class="search-bar">
+<div class="toolbar">
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
-    <input id="searchInput" type="text" placeholder="구역명, 키워드 검색..." oninput="render()">
+    <input id="searchInput" type="text" placeholder="키워드 검색..." oninput="render()">
   </div>
-</div>
-
-<div class="filters">
   <button class="pill active" onclick="setFilter('all',this)">전체</button>
-  <button class="pill" onclick="setFilter('제1차',this)">1차</button>
-  <button class="pill" onclick="setFilter('제2차',this)">2차</button>
-  <button class="pill" onclick="setFilter('제3차',this)">3차</button>
-  <button class="pill" onclick="setFilter('원안가결',this)">원안가결</button>
-  <button class="pill" onclick="setFilter('조건부',this)">조건부 의결</button>
-  <button class="pill" onclick="setFilter('수정가결',this)">수정가결</button>
+  <button class="pill" onclick="setFilter('통합심의',this)">통합심의</button>
+  <button class="pill" onclick="setFilter('사업시행인가',this)">사업시행인가</button>
+  <button class="pill" onclick="setFilter('관리처분',this)">관리처분인가</button>
+  <button class="pill" onclick="setFilter('착공',this)">착공</button>
+  <button class="pill" id="unreadFilterBtn" onclick="setFilter('unread',this)">안읽음만</button>
+  <button class="mark-all-btn" onclick="markAllRead()">전체 읽음</button>
 </div>
 
 <div class="main">
@@ -87,30 +102,58 @@ body { background: var(--bg); font-family: var(--font); color: var(--text); min-
 var NEWS_URL = 'https://raw.githubusercontent.com/sum7788/news/main/data/news.json';
 var allNews = [];
 var curFilter = 'all';
+var READ_KEY = 'readNews';
 
-function setFilter(f, el) {
-  curFilter = f;
-  document.querySelectorAll('.filters .pill').forEach(function(b) { b.classList.remove('active'); });
-  el.classList.add('active');
+function getRead() {
+  try { return JSON.parse(localStorage.getItem(READ_KEY) || '{}'); } catch(e) { return {}; }
+}
+function setRead(id) {
+  var r = getRead(); r[id] = true;
+  localStorage.setItem(READ_KEY, JSON.stringify(r));
+}
+function toggleRead(id) {
+  var r = getRead();
+  if (r[id]) delete r[id]; else r[id] = true;
+  localStorage.setItem(READ_KEY, JSON.stringify(r));
+  render();
+}
+function markAllRead() {
+  var r = getRead();
+  allNews.forEach(function(item) { r[item.url] = true; });
+  localStorage.setItem(READ_KEY, JSON.stringify(r));
   render();
 }
 
-var KW_TAGS = ['통합심의','원안가결','조건부 의결','수정가결','사업시행인가','관리처분인가','정비계획','착공'];
-
+var KW_TAGS = ['통합심의','사업시행인가','관리처분인가','착공','정비계획','정비구역'];
 function getTags(text) {
   return KW_TAGS.filter(function(k) { return text.indexOf(k) >= 0; }).slice(0, 3);
 }
 
+function setFilter(f, el) {
+  curFilter = f;
+  document.querySelectorAll('.toolbar .pill').forEach(function(b) { b.classList.remove('active'); });
+  el.classList.add('active');
+  render();
+}
+
 function render() {
   var q = document.getElementById('searchInput').value.toLowerCase();
+  var readMap = getRead();
+
   var list = allNews.filter(function(item) {
     var text = (item.title + ' ' + (item.summary || '')).toLowerCase();
     var mq = !q || text.indexOf(q) >= 0;
-    var mf = curFilter === 'all' || text.indexOf(curFilter) >= 0;
+    var mf = true;
+    if (curFilter === 'unread') mf = !readMap[item.url];
+    else if (curFilter !== 'all') mf = text.indexOf(curFilter) >= 0;
     return mq && mf;
   });
 
+  var unreadCount = allNews.filter(function(i) { return !readMap[i.url]; }).length;
   document.getElementById('totalBadge').textContent = allNews.length + '건';
+  var ub = document.getElementById('unreadBadge');
+  if (unreadCount > 0) { ub.textContent = 'N ' + unreadCount; ub.style.display = 'inline'; }
+  else { ub.style.display = 'none'; }
   document.getElementById('resultInfo').textContent = list.length + '건 표시 중 (전체 ' + allNews.length + '건)';
 
   var wrap = document.getElementById('newsList');
@@ -118,34 +161,65 @@ function render() {
     wrap.innerHTML = '<div class="empty"><div class="empty-icon">📭</div><div>해당 조건의 뉴스가 없어요</div></div>';
     return;
   }
-  wrap.innerHTML = list.map(function(item) {
-    var text = item.title + ' ' + (item.summary || '');
-    var tags = getTags(text);
-    return '<div class="news-card">' +
-      '<div class="news-title"><a href="' + item.url + '" target="_blank">' + item.title + '</a></div>' +
-      (item.summary ? '<div class="news-summary">' + item.summary + '</div>' : '') +
-      '<div class="news-footer">' +
-        '<span class="news-source">' + (item.source || '') + '</span>' +
-        '<span class="news-date">' + (item.date || '') + '</span>' +
-        tags.map(function(k) { return '<span class="kw-tag">' + k + '</span>'; }).join('') +
-        '<a class="news-link" href="' + item.url + '" target="_blank">원문 →</a>' +
-      '</div>' +
-    '</div>';
-  }).join('');
+
+  // 날짜별 그룹핑
+  var groups = {};
+  list.forEach(function(item) {
+    var d = item.date || item.collected_at || '날짜 없음';
+    if (!groups[d]) groups[d] = [];
+    groups[d].push(item);
+  });
+
+  var dates = Object.keys(groups).sort(function(a,b) { return b > a ? 1 : -1; });
+  var html = '';
+  dates.forEach(function(date) {
+    var items = groups[date];
+    var dayUnread = items.filter(function(i) { return !readMap[i.url]; }).length;
+    html += '<div class="date-group">';
+    html += '<div class="date-label">📅 ' + date +
+      (dayUnread > 0 ? ' <span class="date-unread">N ' + dayUnread + '</span>' : '') +
+      '</div>';
+    items.forEach(function(item) {
+      var isRead = !!readMap[item.url];
+      var text = item.title + ' ' + (item.summary || '');
+      var tags = getTags(text);
+      html += '<div class="news-card' + (isRead ? ' read' : '') + '" id="card-' + btoa(encodeURIComponent(item.url)).slice(0,12) + '">' +
+        '<div class="news-head">' +
+          '<div class="' + (isRead ? 'read-dot' : 'unread-dot') + '"></div>' +
+          '<div class="news-title"><a href="' + item.url + '" target="_blank" onclick="markRead(\'' + encodeURIComponent(item.url) + '\')">' + item.title + '</a></div>' +
+        '</div>' +
+        (item.summary ? '<div class="news-summary">' + item.summary + '</div>' : '') +
+        '<div class="news-footer">' +
+          '<span class="news-source">' + (item.source || '') + '</span>' +
+          tags.map(function(k) { return '<span class="kw-tag">' + k + '</span>'; }).join('') +
+          '<a class="news-link" href="' + item.url + '" target="_blank" onclick="markRead(\'' + encodeURIComponent(item.url) + '\')">원문 →</a>' +
+          '<button class="read-btn" onclick="toggleRead(\'' + encodeURIComponent(item.url) + '\')">' + (isRead ? '↩ 안읽음' : '✓ 읽음') + '</button>' +
+        '</div>' +
+      '</div>';
+    });
+    html += '</div>';
+  });
+  wrap.innerHTML = html;
+}
+
+function markRead(encodedUrl) {
+  var url = decodeURIComponent(encodedUrl);
+  var r = getRead(); r[url] = true;
+  localStorage.setItem(READ_KEY, JSON.stringify(r));
+  setTimeout(render, 300);
 }
 
 fetch(NEWS_URL)
   .then(function(r) { return r.json(); })
   .then(function(data) {
     allNews = data.items || [];
-    if (data.updated) document.getElementById('updatedAt').textContent = '최종 수집: ' + data.updated;
+    if (data.updated) document.getElementById('updatedAt').textContent = '수집: ' + data.updated;
     render();
   })
   .catch(function() {
     document.getElementById('newsList').innerHTML =
       '<div class="empty"><div class="empty-icon">📭</div>' +
-      '<div style="font-weight:600;margin-bottom:6px">아직 수집된 뉴스가 없어요</div>' +
-      '<div style="font-size:12px">GitHub Actions 실행 후 자동으로 채워져요</div></div>';
+      '<div style="font-weight:600;margin-bottom:6px">뉴스를 불러올 수 없어요</div></div>';
     document.getElementById('totalBadge').textContent = '0건';
   });
 </script>
