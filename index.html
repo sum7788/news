@@ -68,15 +68,12 @@ body { background: var(--bg); font-family: var(--font); color: var(--text); min-
 
 <div class="filters">
   <button class="pill active" onclick="setFilter('all',this)">전체</button>
-  <button class="pill" onclick="setFilter('통합심의',this)">통합심의</button>
-  <button class="pill" onclick="setFilter('사업시행인가',this)">사업시행인가</button>
-  <button class="pill" onclick="setFilter('관리처분',this)">관리처분인가</button>
-  <button class="pill" onclick="setFilter('착공',this)">착공</button>
-  <button class="pill" onclick="setFilter('한남',this)">한남</button>
-  <button class="pill" onclick="setFilter('노량진',this)">노량진</button>
-  <button class="pill" onclick="setFilter('목동',this)">목동</button>
-  <button class="pill" onclick="setFilter('여의도',this)">여의도</button>
-  <button class="pill" onclick="setFilter('용산',this)">용산</button>
+  <button class="pill" onclick="setFilter('제1차',this)">1차</button>
+  <button class="pill" onclick="setFilter('제2차',this)">2차</button>
+  <button class="pill" onclick="setFilter('제3차',this)">3차</button>
+  <button class="pill" onclick="setFilter('원안가결',this)">원안가결</button>
+  <button class="pill" onclick="setFilter('조건부',this)">조건부 의결</button>
+  <button class="pill" onclick="setFilter('수정가결',this)">수정가결</button>
 </div>
 
 <div class="main">
@@ -98,10 +95,10 @@ function setFilter(f, el) {
   render();
 }
 
-var KW_TAGS = ['통합심의','사업시행인가','관리처분인가','착공','정비구역','한남','노량진','목동','여의도','용산','흑석','강남','성수','마포'];
+var KW_TAGS = ['통합심의','원안가결','조건부 의결','수정가결','사업시행인가','관리처분인가','정비계획','착공'];
 
 function getTags(text) {
-  return KW_TAGS.filter(function(k) { return text.indexOf(k) >= 0; }).slice(0, 4);
+  return KW_TAGS.filter(function(k) { return text.indexOf(k) >= 0; }).slice(0, 3);
 }
 
 function render() {
