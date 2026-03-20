@@ -11,9 +11,10 @@ CLIENT_ID = os.environ["NAVER_CLIENT_ID"]
 CLIENT_SECRET = os.environ["NAVER_CLIENT_SECRET"]
 
 KEYWORDS = [
-    "서울시 정비사업 통합심의위원회 개최결과",
-    "정비사업 통합심의위원회 재개발 재건축",
-    "서울시 통합심의 재개발 착공 사업시행인가",
+    "서울 통합심의",
+    "정비사업 통합심의",
+    "재개발 통합심의",
+    "재건축 통합심의",
 ]
 
 def load():
@@ -51,16 +52,14 @@ def search(keyword):
         print(f"오류 ({keyword}): {e}")
         return {"items": []}
 
-# 통합심의 관련 키워드 — 이 중 하나라도 포함된 기사만 저장
-FILTER_KEYWORDS = [
-    "통합심의위원회",
-    "통합심의 개최결과",
-    "정비사업 통합심의",
-]
+# 이 중 하나라도 포함되면 저장 (필터 완화)
+FILTER_KEYWORDS = ["통합심의"]
 
 def is_relevant(title, summary):
     text = title + " " + summary
-    return any(kw in text for kw in FILTER_KEYWORDS)
+    matched = [kw for kw in FILTER_KEYWORDS if kw in text]
+    print(f"  → {'통과' if matched else '제외'} | {title[:50]}")
+    return len(matched) >= 1
 
 def main():
     data = load()
@@ -68,15 +67,19 @@ def main():
     added = []
 
     for kw in KEYWORDS:
-        print(f"검색: {kw}")
+        print(f"\n검색: {kw}")
         result = search(kw)
-        for item in result.get("items", []):
+        items = result.get("items", [])
+        print(f"  API 결과: {len(items)}건")
+
+        for item in items:
             title = clean(item.get("title", ""))
             url = item.get("originallink") or item.get("link", "")
             summary = clean(item.get("description", ""))[:300]
             date = parse_date(item.get("pubDate", ""))
 
             if url in existing:
+                print(f"  → 중복 건너뜀 | {title[:40]}")
                 continue
             if not is_relevant(title, summary):
                 continue
@@ -90,7 +93,7 @@ def main():
             existing.add(url)
             added.append(title)
 
-    data["items"].sort(key=lambda x: x.get("date",""), reverse=True)
+    data["items"].sort(key=lambda x: x.get("date", ""), reverse=True)
     data["items"] = data["items"][:300]
 
     if added:
@@ -98,7 +101,7 @@ def main():
         for t in added[:10]:
             print(f"  · {t}")
     else:
-        print("신규 없음")
+        print("\n신규 없음")
 
     save(data)
     print(f"\n총 {len(data['items'])}건 저장")
