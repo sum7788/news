@@ -99,7 +99,8 @@ body { background: var(--bg); font-family: var(--font); color: var(--text); min-
 </div>
 
 <script>
-var NEWS_URL = 'https://raw.githubusercontent.com/sum7788/news/main/data/news.json';
+// 캐시 버스팅: 매번 새로운 URL로 요청해서 항상 최신 데이터를 가져옴
+var NEWS_URL = 'https://raw.githubusercontent.com/sum7788/news/main/data/news.json?t=' + Date.now();
 var allNews = [];
 var curFilter = 'all';
 var READ_KEY = 'readNews';
